@@ -30,10 +30,13 @@ const authFormSchema = (formType: FormType) => {
 type FormType = "sign-in" | "sign-up";
 
 import React, { useState } from "react";
+import { createAccount } from "@/lib/actions/user.actions";
+import OtpModal from "./OTPModal";
 
 const AuthForm = ({ type }: { type: FormType }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [accountId, setAccountId] = useState(null);
 
   const formSchema = authFormSchema(type);
 
@@ -48,7 +51,21 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   //2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    setIsLoading(true);
+    setErrorMessage("");
+
+    try {
+      const user = await createAccount({
+        fullName: values.fullName || "",
+        email: values.email,
+      });
+
+      setAccountId(user.accountId);
+    } catch {
+      setErrorMessage("Failed to create account. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -124,11 +141,17 @@ const AuthForm = ({ type }: { type: FormType }) => {
               href={type === "sign-in" ? "/sign-up" : "/sign-in"}
               className="ml-1 font-medium text-brand"
             >
-              {type === "sign-in" ? "Sing Up" : "Sign In"}
+              {type === "sign-in" ? "Sign Up" : "Sign In"}
             </Link>
           </div>
         </form>
       </Form>
+
+      {/*OTP Verification */}
+
+      {accountId && (
+        <OtpModal email={form.getValues("email")} accountId={accountId} />
+      )}
     </>
   );
 };
