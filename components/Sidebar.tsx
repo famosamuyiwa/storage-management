@@ -52,7 +52,7 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
                   height={24}
                   className={cn(
                     "nav-icon",
-                    pathname === url && "nav-icon-inactive"
+                    pathname === url && "nav-icon-active"
                   )}
                 />
                 <p className="hidden lg:block">{name}</p>
@@ -79,7 +79,7 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
         />
         <div className="hidden lg:block">
           <p className="subtitle-2 capitalize">{fullName}</p>
-          <p className="caption">{email}</p>
+          <p className="caption line-clamp-1">{email}</p>
         </div>
       </div>
     </aside>
