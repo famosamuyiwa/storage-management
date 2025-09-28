@@ -40,8 +40,6 @@ A storage management and file sharing platform that lets users effortlessly uplo
 
 👉 **File Sharing**: Users can easily share their uploaded files with others, enabling collaboration and easy access to important content.
 
-👉 **Dashboard**: Gain insights at a glance with a dynamic dashboard that showcases total and consumed storage, recent uploads, and a summary of files grouped by type.
-
 👉 **Global Search**: Users can quickly find files and shared content across the platform with a robust global search feature.
 
 👉 **Sorting Options**: Organize files efficiently by sorting them by date, name, or size, making file management a breeze.
